@@ -140,7 +140,7 @@ const Hero: React.FC = () => {
             <div className="relative w-64 h-64 mx-auto">
               <div className="absolute inset-0 rounded-full bg-gradient-to-r from-[#00D9FF]/20 to-[#00D9FF]/10 animate-pulse"></div>
               <img
-                src="../me.jpeg" 
+                src="me.jpeg" 
                 alt="Om Pachauli"
                 className="rounded-full w-full h-full object-cover border-4 border-[#00D9FF]/30"
               />
