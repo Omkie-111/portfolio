@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { ArrowRight, Github, Linkedin, Download } from 'lucide-react';
+import me from './me.jpeg';
 
 const Hero: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -140,7 +141,7 @@ const Hero: React.FC = () => {
             <div className="relative w-64 h-64 mx-auto">
               <div className="absolute inset-0 rounded-full bg-gradient-to-r from-[#00D9FF]/20 to-[#00D9FF]/10 animate-pulse"></div>
               <img
-                src="./me.jpeg" 
+                src={me} 
                 alt="Om Pachauli"
                 className="rounded-full w-full h-full object-cover border-4 border-[#00D9FF]/30"
               />
