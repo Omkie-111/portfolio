@@ -6,17 +6,25 @@ const experiences = [
   {
     id: 1,
     company: 'Darwix AI',
-    role: 'Senior AI Engineer',
-    period: 'Jan 2023 - Present',
-    location: 'Gurugram, India',
-    description:
-      'Leading the development of real-time AI systems for predictive analytics and decision support.',
+    role: 'Software Development Engineer (Artificial Intelligence)',
+    period: 'Jan 2025 – Present',
+    location: 'Gurugram, Haryana, India',
     achievements: [
-      'Architected and deployed an end-to-end document intelligence system that reduced manual processing by 85%',
-      'Led a team of 5 engineers in developing an NLP-powered customer support automation platform',
-      'Optimized ML inference pipelines, reducing latency by 60% and cloud costs by 40%',
+      'Optimized AI infrastructure for 10K+ concurrent users, improving availability by 35%',
+      'Developed scalable transcription-analysis pipelines and RAG-based compliance tools, achieving 90% speech-to-text accuracy',
+      'Built and fine-tuned LLMs for real-time sales feedback with sub-2s latency',
+      'Reviewed 100+ pull requests, enforcing best practices and reducing production issues by 30%'
     ],
-    skills: ['TensorFlow', 'LangChain', 'RAG', 'Python', 'FastAPI', 'AWS'],
+    projects: [
+      {
+        name: 'Realtime Conversational AI Assist',
+        description: 'Developed a scalable, real-time conversational AI system for sales call transcription and analysis. Leveraged FastAPI, Redis, and AWS to process over 100K calls monthly with sub-2s latency and 90% speech-to-text accuracy. Integrated LangChain, GPT-4.1, and RAG with ChromaDB for efficient vector storage and retrieval, enabling advanced analytics of salesperson-customer interactions. Utilized prompt engineering to provide actionable insights, significantly enhancing sales team performance.'
+      },
+      {
+        name: 'Conversational AI Agent',
+        description: 'Created a robust outbound calling agent system using LangChain, GPT-4.2, and RAG with PostgreSQL, enhanced by Twilio integration. Enabled automated, high-accuracy customer interactions, revolutionizing outreach efficiency and engagement.'
+      }
+    ]
   },
   {
     id: 2,
@@ -106,41 +114,44 @@ const ExperienceItem: React.FC<{
                 </div>
               </div>
             </div>
-            
-            <p className="text-gray-300 mb-4">{experience.description}</p>
-            
-            <button
-              onClick={() => setExpanded(!expanded)}
-              className="flex items-center text-sm text-[#00D9FF] hover:text-[#00D9FF]/80 mb-4 font-medium"
-            >
-              {expanded ? 'Show Less' : 'Show Achievements'}
-              <ChevronRight
-                className={`h-4 w-4 ml-1 transform transition-transform ${
-                  expanded ? 'rotate-90' : 'rotate-0'
-                }`}
-              />
-            </button>
-            
-            {expanded && (
-              <div className="mt-4 animate-fadeIn">
-                <h4 className="text-sm font-semibold text-gray-200 mb-2">Key Achievements:</h4>
-                <ul className="list-disc list-inside text-gray-400 space-y-2 mb-4">
-                  {experience.achievements.map((achievement, i) => (
-                    <li key={i} className="text-sm">{achievement}</li>
-                  ))}
-                </ul>
-                
-                <div className="flex flex-wrap gap-2 mt-4">
-                  {experience.skills.map((skill) => (
-                    <span
-                      key={skill}
-                      className="text-xs font-medium px-2 py-1 rounded-full bg-[#00D9FF]/10 text-[#00D9FF]"
-                    >
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-              </div>
+
+            <div className="mt-4">
+              <h4 className="text-sm font-semibold text-gray-200 mb-2">Key Achievements:</h4>
+              <ul className="list-disc list-inside text-gray-400 space-y-2">
+                {experience.achievements.map((achievement, i) => (
+                  <li key={i} className="text-sm">{achievement}</li>
+                ))}
+              </ul>
+            </div>
+
+            {experience.projects && (
+              <>
+                <button
+                  onClick={() => setExpanded(!expanded)}
+                  className="flex items-center text-sm text-[#00D9FF] hover:text-[#00D9FF]/80 mt-4 font-medium"
+                >
+                  {expanded ? 'Hide Projects' : 'View Projects'}
+                  <ChevronRight
+                    className={`h-4 w-4 ml-1 transform transition-transform ${
+                      expanded ? 'rotate-90' : 'rotate-0'
+                    }`}
+                  />
+                </button>
+
+                {expanded && (
+                  <div className="mt-4 space-y-4 animate-fadeIn">
+                    {experience.projects.map((project, i) => (
+                      <div
+                        key={i}
+                        className="bg-[#1D2026] p-4 rounded-md border border-gray-700"
+                      >
+                        <h5 className="text-white font-medium mb-2">{project.name}</h5>
+                        <p className="text-sm text-gray-400">{project.description}</p>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </>
             )}
           </div>
         </div>
