@@ -1,72 +1,55 @@
 import React, { useState, useRef } from 'react';
 import { useInView } from '../hooks/useInView';
-import { ExternalLink, Github, Code } from 'lucide-react';
+import { ExternalLink, Github, Code, Database, Brain, Cloud, Server } from 'lucide-react';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
-// Project data
 const projects = [
   {
     id: 1,
-    title: 'AI-Powered Document Analysis',
-    description:
-      'Developed an intelligent document processing system that extracts, categorizes, and summarizes information from unstructured documents using advanced NLP techniques.',
-    image: 'https://images.pexels.com/photos/7255573/pexels-photo-7255573.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-    tags: ['Python', 'TensorFlow', 'NLP', 'OCR', 'FastAPI'],
-    demoLink: 'https://example.com',
-    codeLink: 'https://github.com',
-    category: 'AI/ML',
-    highlights: [
-      'Reduced manual processing time by 85%',
-      'Achieved 93% accuracy in information extraction',
-      'Processed over 10,000 documents daily',
-    ],
+    title: 'BioPrid',
+    emoji: '🧪',
+    description: 'Implemented QSAR and DTI models using CHEMBL and KIBA datasets, improving drug screening accuracy by 15% and reducing development time by 20%.',
+    technologies: ['Python', 'Machine Learning', 'TensorFlow'],
+    codeSnippet: `def train_dti_model(x_train, y_train):
+    model = Sequential([
+        Dense(512, activation='relu'),
+        Dropout(0.3),
+        Dense(1, activation='sigmoid')
+    ])
+    return model`,
+    icon: <Brain className="h-8 w-8" />,
+    category: 'AI/ML'
   },
   {
     id: 2,
-    title: 'Scalable E-commerce Backend',
-    description:
-      'Built a high-performance backend system for an e-commerce platform capable of handling peak traffic loads with efficient caching and database optimization.',
-    image: 'https://images.pexels.com/photos/6956903/pexels-photo-6956903.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-    tags: ['Node.js', 'PostgreSQL', 'Redis', 'Docker', 'AWS'],
-    demoLink: 'https://example.com',
-    codeLink: 'https://github.com',
-    category: 'Backend',
-    highlights: [
-      'Supported 10,000+ concurrent users',
-      'Reduced response time by 60%',
-      'Implemented efficient inventory management',
-    ],
+    title: 'Image Reducer',
+    company: 'StudyAsan',
+    emoji: '🖼️',
+    description: 'Designed an asynchronous image processing API using FastAPI, Celery, Docker, and SQLAlchemy, handling 1,000+ daily tasks with 99% accuracy.',
+    technologies: ['FastAPI', 'Celery', 'Docker', 'SQLAlchemy', 'MongoDB'],
+    codeSnippet: `@app.post("/process-image")
+async def process_image(image: UploadFile):
+    task = process_image.delay(image.file)
+    return {"task_id": task.id}`,
+    icon: <Server className="h-8 w-8" />,
+    category: 'Backend'
   },
   {
     id: 3,
-    title: 'Conversational AI Assistant',
-    description:
-      'Created an intelligent virtual assistant capable of natural conversations, task automation, and integration with multiple services and knowledge bases.',
-    image: 'https://images.pexels.com/photos/8386434/pexels-photo-8386434.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-    tags: ['Python', 'LangChain', 'FastAPI', 'Vector DB', 'RAG'],
-    demoLink: 'https://example.com',
-    codeLink: 'https://github.com',
-    category: 'AI/ML',
-    highlights: [
-      'Handled 5,000+ daily user interactions',
-      'Integrated with 15+ external APIs',
-      'Reduced customer support tickets by 40%',
-    ],
-  },
-  {
-    id: 4,
-    title: 'Cloud-Native Microservices Architecture',
-    description:
-      'Designed and implemented a microservices architecture for a financial services platform, ensuring high availability, fault tolerance, and horizontal scalability.',
-    image: 'https://images.pexels.com/photos/325229/pexels-photo-325229.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-    tags: ['Kubernetes', 'Docker', 'AWS', 'CI/CD', 'Microservices'],
-    demoLink: 'https://example.com',
-    codeLink: 'https://github.com',
-    category: 'Cloud',
-    highlights: [
-      'Achieved 99.99% uptime',
-      'Reduced deployment time by 85%',
-      'Implemented zero-downtime updates',
-    ],
+    title: 'Realtime Conversational AI Assist',
+    company: 'Darwix AI',
+    emoji: '🎯',
+    description: 'Developed a scalable, real-time conversational AI system for sales call transcription and analysis.',
+    technologies: ['FastAPI', 'Redis', 'AWS', 'LangChain', 'ChromaDB'],
+    codeSnippet: `async def process_conversation(
+    audio: bytes,
+    context: dict
+) -> ConversationAnalysis:
+    transcript = await transcribe(audio)
+    return analyze_context(transcript)`,
+    icon: <Brain className="h-8 w-8" />,
+    category: 'AI/ML'
   },
 ];
 
@@ -82,67 +65,74 @@ const ProjectCard: React.FC<{
     <div
       ref={cardRef}
       className={`bg-[#161A1F] rounded-lg overflow-hidden transition-all duration-700 ${
-        isInView
-          ? 'opacity-100 translate-y-0'
-          : 'opacity-0 translate-y-10'
+        isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
       }`}
       style={{ transitionDelay: `${index * 100}ms` }}
     >
-      <div className="relative h-48 overflow-hidden">
-        <img
-          src={project.image}
-          alt={project.title}
-          className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0F1419] to-transparent opacity-70"></div>
-        <div className="absolute top-4 right-4 flex space-x-2">
-          {project.tags.slice(0, 3).map((tag) => (
+      <div className="p-6">
+        <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center space-x-3">
+            <div className="rounded-full bg-[#00D9FF]/10 p-3">
+              {project.icon}
+            </div>
+            <div>
+              <h3 className="text-xl font-bold text-white">
+                {project.emoji} {project.title}
+              </h3>
+              {project.company && (
+                <p className="text-[#00D9FF] text-sm">{project.company}</p>
+              )}
+            </div>
+          </div>
+        </div>
+
+        <p className="text-gray-400 mb-4">{project.description}</p>
+
+        <div className="flex flex-wrap gap-2 mb-4">
+          {project.technologies.map((tech) => (
             <span
-              key={tag}
-              className="text-xs font-medium px-2 py-1 rounded-full bg-[#00D9FF]/20 text-[#00D9FF]"
+              key={tech}
+              className="text-xs font-medium px-2 py-1 rounded-full bg-[#00D9FF]/10 text-[#00D9FF]"
             >
-              {tag}
+              {tech}
             </span>
           ))}
         </div>
-      </div>
 
-      <div className="p-6">
-        <h3 className="text-xl font-bold mb-2 text-white">{project.title}</h3>
-        <p className="text-gray-400 mb-4 line-clamp-2">{project.description}</p>
-        
         <button
           onClick={() => setShowDetails(!showDetails)}
           className="text-sm text-[#00D9FF] hover:text-[#00D9FF]/80 mb-4 font-medium"
         >
-          {showDetails ? 'Hide Details' : 'View Details'}
+          {showDetails ? 'Hide Code' : 'View Code'}
         </button>
-        
+
         {showDetails && (
           <div className="mt-4 mb-6 animate-fadeIn">
-            <h4 className="text-sm font-semibold text-gray-300 mb-2">Key Highlights:</h4>
-            <ul className="list-disc list-inside text-gray-400 space-y-1">
-              {project.highlights.map((highlight, i) => (
-                <li key={i} className="text-sm">{highlight}</li>
-              ))}
-            </ul>
+            <SyntaxHighlighter
+              language="python"
+              style={atomDark}
+              customStyle={{
+                backgroundColor: '#1D2026',
+                borderRadius: '0.5rem',
+                padding: '1rem',
+                fontSize: '0.875rem'
+              }}
+            >
+              {project.codeSnippet}
+            </SyntaxHighlighter>
           </div>
         )}
-        
+
         <div className="flex space-x-3 mt-4">
           <a
-            href={project.demoLink}
-            target="_blank"
-            rel="noopener noreferrer"
+            href="#"
             className="flex items-center text-sm text-gray-300 hover:text-[#00D9FF] transition-colors"
           >
             <ExternalLink className="h-4 w-4 mr-1" />
             Live Demo
           </a>
           <a
-            href={project.codeLink}
-            target="_blank"
-            rel="noopener noreferrer"
+            href="#"
             className="flex items-center text-sm text-gray-300 hover:text-[#00D9FF] transition-colors"
           >
             <Github className="h-4 w-4 mr-1" />
