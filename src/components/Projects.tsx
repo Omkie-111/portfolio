@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { useInView } from '../hooks/useInView';
-import { ExternalLink, Github, Code, Database, Brain, Cloud, Server } from 'lucide-react';
+import { Brain, Server } from 'lucide-react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
@@ -37,20 +37,18 @@ async def process_image(image: UploadFile):
   },
   {
     id: 3,
-    title: 'Realtime Conversational AI Assist',
-    company: 'Darwix AI',
-    emoji: '🎯',
-    description: 'Developed a scalable, real-time conversational AI system for sales call transcription and analysis.',
-    technologies: ['FastAPI', 'Redis', 'AWS', 'LangChain', 'ChromaDB'],
-    codeSnippet: `async def process_conversation(
-    audio: bytes,
-    context: dict
-) -> ConversationAnalysis:
-    transcript = await transcribe(audio)
-    return analyze_context(transcript)`,
+    title: 'TuneMentor',
+    company: 'Tex Pvt. Ltd.',
+    emoji: '🎵',
+    description: 'Developed a web app extension using Django and deep learning to identify piano keys from audio with 85% accuracy. Deployed via cPanel on CentOS, resolving 60% of deployment issues.',
+    technologies: ['Django', 'Deep Learning', 'MySQL', 'cPanel', 'CentOS'],
+    codeSnippet: `class AudioProcessor:
+    def process_audio(self, audio_file):
+        features = self.extract_features(audio_file)
+        return self.model.predict(features)`,
     icon: <Brain className="h-8 w-8" />,
     category: 'AI/ML'
-  },
+  }
 ];
 
 const ProjectCard: React.FC<{
@@ -122,23 +120,6 @@ const ProjectCard: React.FC<{
             </SyntaxHighlighter>
           </div>
         )}
-
-        <div className="flex space-x-3 mt-4">
-          <a
-            href="#"
-            className="flex items-center text-sm text-gray-300 hover:text-[#00D9FF] transition-colors"
-          >
-            <ExternalLink className="h-4 w-4 mr-1" />
-            Live Demo
-          </a>
-          <a
-            href="#"
-            className="flex items-center text-sm text-gray-300 hover:text-[#00D9FF] transition-colors"
-          >
-            <Github className="h-4 w-4 mr-1" />
-            Code
-          </a>
-        </div>
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { useInView } from '../hooks/useInView';
 import { Calendar, MapPin, ChevronRight } from 'lucide-react';
 
@@ -29,55 +29,53 @@ const experiences = [
   {
     id: 2,
     company: 'Xeloop Media',
-    role: 'Backend Developer',
-    period: 'Mar 2021 - Dec 2022',
-    location: 'Remote',
-    description:
-      'Designed and implemented the backend infrastructure for an SSP (Supply-Side Platform) in the digital advertising space.',
+    role: 'Software Development Engineer',
+    period: 'Feb 2024 – Dec 2024',
+    location: 'Lucknow, Uttar Pradesh, India',
     achievements: [
-      'Built high-throughput API endpoints handling 50,000+ requests per minute',
-      'Implemented real-time data processing pipelines for ad performance analytics',
-      'Designed and maintained database schemas supporting complex queries across millions of records',
+      'Led backend development for an SSP platform serving 100+ clients, improving system performance by 90%',
+      'Integrated Appsflyer, Razorpay, Branch, and Trackier APIs, enhancing campaign attribution and payment workflows',
+      'Reduced deployment time from 2 hours to 15 minutes using GitLab CI/CD and Docker',
+      'Mentored interns and collaborated with frontend teams for 100% API compatibility'
     ],
-    skills: ['Node.js', 'PostgreSQL', 'Redis', 'Docker', 'RESTful APIs'],
+    projects: [
+      {
+        name: 'SSP Service Website',
+        description: 'Led the development of a high-performance supply-side platform (SSP) backend and service website using Django, FastAPI, Docker, and Redis. Achieved a 90% performance improvement and seamlessly integrated key APIs (Appsflyer, Razorpay, Branch) for enhanced analytics and payment processing. Implemented a RAG pipeline with ChromaDB to deliver actionable insights on ad coverage, optimizing client placements and maximizing revenue.'
+      }
+    ]
   },
   {
     id: 3,
     company: 'StudyAsan',
-    role: 'Full Stack Developer',
-    period: 'Jun 2020 - Feb 2021',
-    location: 'Remote',
-    description:
-      'Developed an educational platform that connects students with tutors and provides interactive learning tools.',
+    role: 'Freelance Software Developer',
+    period: 'Nov 2022 – Aug 2023',
+    location: 'Haldwani, Uttarakhand, India',
     achievements: [
-      'Created a video conferencing system with integrated whiteboard and document sharing',
-      'Implemented an automated scheduling system that increased tutor utilization by 35%',
-      'Developed responsive user interfaces that improved user engagement metrics by 45%',
-    ],
-    skills: ['React', 'Django', 'WebRTC', 'PostgreSQL', 'AWS'],
+      'Developed backend systems for web applications using Django, Flask, and MongoDB, ensuring 99% uptime',
+      'Built Image Reducer API, automating workflows and saving 10+ hours/day of manual effort',
+      'Fixed 50+ bugs on the main website, improving performance by 20%'
+    ]
   },
   {
     id: 4,
-    company: 'Tex Pvt. Ltd',
-    role: 'Junior Developer',
-    period: 'Jan 2019 - May 2020',
-    location: 'Delhi, India',
-    description:
-      'Worked on developing and maintaining e-commerce systems and inventory management solutions.',
+    company: 'Tex Pvt. Ltd.',
+    role: 'Software Development Intern',
+    period: 'Nov 2021 – Mar 2022',
+    location: 'Lucknow, Uttar Pradesh, India',
     achievements: [
-      'Contributed to building a product recommendation engine using collaborative filtering',
-      'Implemented automated inventory management features that reduced stockouts by 25%',
-      'Assisted in migrating legacy systems to a modern microservices architecture',
-    ],
-    skills: ['Python', 'Django', 'MySQL', 'JavaScript', 'RESTful APIs'],
-  },
+      'Built TuneMentor, a web app extension using Django and deep learning for piano key detection with 85% accuracy',
+      'Deployed via cPanel on CentOS, resolving 60% of deployment issues',
+      'Collaborated with AI engineers to debug 10% of critical integration issues'
+    ]
+  }
 ];
 
 const ExperienceItem: React.FC<{
   experience: typeof experiences[0];
   index: number;
 }> = ({ experience, index }) => {
-  const [expanded, setExpanded] = React.useState(false);
+  const [expanded, setExpanded] = useState(false);
   const itemRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(itemRef, { threshold: 0.1 });
 
