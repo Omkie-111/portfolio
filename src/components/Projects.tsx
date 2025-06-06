@@ -97,12 +97,7 @@ const ProjectCard: React.FC<{
           ))}
         </div>
 
-        <button
-          onClick={() => setShowDetails(!showDetails)}
-          className="text-sm text-[#00D9FF] hover:text-[#00D9FF]/80 mb-4 font-medium"
-        >
-          {showDetails ? 'Hide Code' : 'View Code'}
-        </button>
+       
 
         {showDetails && (
           <div className="mt-4 mb-6 animate-fadeIn">
