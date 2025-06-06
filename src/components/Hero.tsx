@@ -102,7 +102,7 @@ const Hero: React.FC = () => {
               </a>
               <a
                 href="https://flowcv.com/resume/lq3dejw66uki"
-                download
+                
                 className="px-6 py-3 border border-[#00D9FF] text-[#00D9FF] font-medium rounded-md hover:bg-[#00D9FF]/10 transition-all duration-300 flex items-center"
               >
                 Download Resume
