@@ -101,7 +101,7 @@ const Hero: React.FC = () => {
                 <ArrowRight className="ml-2 h-4 w-4" />
               </a>
               <a
-                href="/resume.pdf"
+                href="https://flowcv.com/resume/lq3dejw66uki"
                 download
                 className="px-6 py-3 border border-[#00D9FF] text-[#00D9FF] font-medium rounded-md hover:bg-[#00D9FF]/10 transition-all duration-300 flex items-center"
               >
